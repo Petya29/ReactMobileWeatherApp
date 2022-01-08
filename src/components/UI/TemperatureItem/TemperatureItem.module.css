@@ -1,0 +1,20 @@
+.temperatureItem {
+    height: auto;
+}
+
+.temperatureItemDay {
+    height: 22px;
+    margin-bottom: 5px;
+}
+
+.temperatureItemTime {
+    display: inline;
+}
+
+.temperatureItemIcon img {
+    width: 80px;
+}
+
+.temperatureItemTemp {
+    margin-top: -14px;
+}

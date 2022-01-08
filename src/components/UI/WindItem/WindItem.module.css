@@ -1,0 +1,8 @@
+.windItem {
+    height: auto;
+}
+
+.windItem i,
+.windItemDirection {
+    color: #ec6e4c;
+}

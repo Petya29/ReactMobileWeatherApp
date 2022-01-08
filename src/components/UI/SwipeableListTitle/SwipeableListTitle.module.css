@@ -1,0 +1,16 @@
+.weatherSwipeWind {
+    position: absolute;
+    width: 100%;
+  }
+  
+.weatherSwipeTitle{
+    height: 22px;
+    position: relative;
+  }
+  
+.weatherSwipeTitle div {
+    background-color: #282c34;
+    position: absolute;
+    top: -12px;
+    padding-right: 5px;
+  }
