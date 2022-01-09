@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "3.3.4",
+    "@capacitor/cli": "^3.3.4",
+    "@capacitor/core": "^3.3.4",
+    "@ionic/cli": "^6.18.1",
     "@reduxjs/toolkit": "^1.7.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
