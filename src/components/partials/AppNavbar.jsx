@@ -28,7 +28,7 @@ export default function AppNavbar() {
                 :
                 <span></span>
             }
-            {location.pathname !== "/about"
+            {location.pathname !== "/about" && location.pathname !== "/settings"
                 ?
                 <Link to="/settings" className="settings-icon">
                     <span>

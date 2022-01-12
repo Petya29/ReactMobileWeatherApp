@@ -15,6 +15,10 @@ export default function AppRouter() {
         history.listen((location) => {
             dispatch(setScreenName(location.pathname));
         })
+        if (localStorage.getItem('redirect') === 'true') {
+            localStorage.setItem('redirect', false);
+            history.push('/weather');
+        }
     }, [history]);
 
     return (

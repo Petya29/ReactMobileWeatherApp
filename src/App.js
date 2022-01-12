@@ -8,6 +8,10 @@ import './styles/App.css';
 
 function App() {
 
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem('redirect', true);
+  });
+
   useEffect(() => {
     //Materialize config
     M.AutoInit();
