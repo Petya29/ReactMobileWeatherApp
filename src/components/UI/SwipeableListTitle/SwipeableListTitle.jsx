@@ -4,7 +4,7 @@ import classes from './SwipeableListTitle.module.css';
 
 export default function SwipeableListTitle(props) {
 
-    const units = useSelector(state => state.weatherReducer.units);
+    const units = useSelector(state => state.global.units);
 
     const formatTitle = (title) => {
         if (title === 'wind') {

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { setUnitsWindSpeed } from "../../store/reducers/weatherSlice";
+import { setUnitsWindSpeed } from "../../store/reducers/globalSlice";
 
 export default function WindSpeedSwitcher() {
 
-    const units = useSelector(state => state.weatherReducer.units);
+    const units = useSelector(state => state.global.units);
 
     const dispatch = useDispatch();
 

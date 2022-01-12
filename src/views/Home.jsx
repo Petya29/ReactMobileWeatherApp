@@ -9,9 +9,9 @@ export default function Home() {
 
     const history = useHistory();
 
-    const cities = useSelector(state => state.weatherReducer.cities);
-    const currentWeather = useSelector(state => state.weatherReducer.currentWeather);
-    const lastFetch = useSelector(state => state.weatherReducer.lastFetch);
+    const cities = useSelector(state => state.weather.cities);
+    const currentWeather = useSelector(state => state.weather.currentWeather);
+    const lastFetch = useSelector(state => state.weather.lastFetch);
 
     const dispatch = useDispatch();
 

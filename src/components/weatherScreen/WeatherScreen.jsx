@@ -6,8 +6,8 @@ import { celsiusToFahrenheit, meterSecToMileshour } from '../../helpers/units';
 
 export default function WeatherScreen() {
 
-    const currentWeather = useSelector(state => state.weatherReducer.currentWeather);
-    const units = useSelector(state => state.weatherReducer.units);
+    const currentWeather = useSelector(state => state.weather.currentWeather);
+    const units = useSelector(state => state.global.units);
 
     const [time, setTime] = useState(getTime());
 

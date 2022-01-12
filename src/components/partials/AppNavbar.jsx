@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 export default function AppNavbar() {
 
-    const screenName = useSelector(state => state.weatherReducer.screenName);
+    const screenName = useSelector(state => state.weather.screenName);
 
     const location = useLocation();
     const history = useHistory();

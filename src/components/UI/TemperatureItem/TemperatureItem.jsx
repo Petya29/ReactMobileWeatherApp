@@ -6,7 +6,7 @@ import classes from './TemperatureItem.module.css';
 
 export default function TemperatureItem(props) {
 
-    const units = useSelector(state => state.weatherReducer.units);
+    const units = useSelector(state => state.global.units);
 
     return (
         <div className={classes.temperatureItem}>

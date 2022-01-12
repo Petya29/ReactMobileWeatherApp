@@ -8,8 +8,8 @@ import MissData from '../errors/MissData';
 
 export default function Weather() {
 
-    const currentWeather = useSelector(state => state.weatherReducer.currentWeather);
-    const forecastWeather = useSelector(state => state.weatherReducer.forecastWeather);
+    const currentWeather = useSelector(state => state.weather.currentWeather);
+    const forecastWeather = useSelector(state => state.weather.forecastWeather);
 
     useEffect(() => {
         const elemsTabs = document.querySelectorAll('.tabs');

@@ -7,7 +7,7 @@ import { prepareCurrentWeather } from '../../helpers/weather';
 
 export default function CurrentWeather() {
 
-    const forecastWeather = useSelector(state => state.weatherReducer.forecastWeather);
+    const forecastWeather = useSelector(state => state.weather.forecastWeather);
 
     return (
         <div className="current-weather">

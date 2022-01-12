@@ -4,7 +4,7 @@ import { degreeToCommonDirection, meterSecToMileshour } from '../../../helpers/u
 import classes from './WindItem.module.css';
 
 export default function WindItem(props) {
-    const units = useSelector(state => state.weatherReducer.units);
+    const units = useSelector(state => state.global.units);
 
     return (
         <div className={classes.windItem}>
