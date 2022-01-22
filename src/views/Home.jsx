@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import WeatherService from '../services/WeatherService';
 import { setCurrentWeather, setForecastWeather, setCities, setLastFetch } from '../store/reducers/weatherSlice';
 import AppLogo from '../components/partials/AppLogo';
+import CurrentLocation from '../components/locationSearch/CurrentLocation';
 
 export default function Home() {
 
@@ -102,6 +103,9 @@ export default function Home() {
                         <i className="material-icons right">search</i>
                     }
                 </button>
+            </div>
+            <div className="my-location">
+                <CurrentLocation />
             </div>
         </div>
     )

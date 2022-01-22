@@ -19,6 +19,33 @@ export default class WeatherService {
         return false;
     }
 
+    static async getCurrentWeatherByCoords(lat, lon) {
+        return axios.get(
+            `${process.env.REACT_APP_BASE_API_URL}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        );
+    }
+
+    static async getForecastWeatherByCoords(lat, lon) {
+        return axios.get(
+            `${process.env.REACT_APP_BASE_API_URL}/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+        );
+    }
+
+    static checkLastFetch(lastFetch, type) {
+        if (lastFetch || lastFetch === '') {
+            if (lastFetch === '') return true;
+            const formatedLastFetch = new Date(lastFetch);
+            const currDate = new Date();
+            const difference = (currDate - formatedLastFetch) / 1000 / 60;
+            if (type === 'current') {
+                if (!isNaN(difference) && difference > Number(process.env.REACT_APP_CURRENT_FETCH_INTERVAL)) return true;
+            } else if (type === 'forecast') {
+                if (!isNaN(difference) && difference > Number(process.env.REACT_APP_FORECAST_FETCH_INTERVAL)) return true;
+            }
+        }
+        return false;
+    }
+
     static createCityFromResponse(response, location) {
         return {
             id: response.id,
@@ -52,21 +79,6 @@ export default class WeatherService {
             name: response.city.name,
             weatherList: response.list
         }
-    }
-
-    static checkLastFetch(lastFetch, type) {
-        if (lastFetch || lastFetch === '') {
-            if (lastFetch === '') return true;
-            const formatedLastFetch = new Date(lastFetch);
-            const currDate = new Date();
-            const difference = (currDate - formatedLastFetch) / 1000 / 60;
-            if (type === 'current') {
-                if (!isNaN(difference) && difference > Number(process.env.REACT_APP_CURRENT_FETCH_INTERVAL)) return true;
-            } else if (type === 'forecast') {
-                if (!isNaN(difference) && difference > Number(process.env.REACT_APP_FORECAST_FETCH_INTERVAL)) return true;
-            }
-        }
-        return false;
     }
 
     static citiesIncludesWeather(cities, city, currWeather) {

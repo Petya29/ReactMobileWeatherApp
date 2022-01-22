@@ -232,3 +232,8 @@ a:focus.active {
   position: relative;
   background-color: #282c34;
 }
+
+.my-location {
+  color: #039be5;
+  margin-top: 3%;
+}
