@@ -4,6 +4,7 @@ import { setCurrentWeather, setForecastWeather, setCities, setLastFetch } from '
 import { useHistory } from 'react-router-dom';
 import M from 'materialize-css';
 import WeatherService from '../../services/WeatherService';
+import { Geolocation } from '@ionic-native/geolocation';
 
 export default function CurrentLocation() {
 
@@ -14,55 +15,41 @@ export default function CurrentLocation() {
     const currentWeather = useSelector(state => state.weather.currentWeather);
 
     const [loading, setLoading] = useState(false);
-    const [geolocationErr, serGeolocationErr] = useState(false);
+    const [geolocationErr, setGeolocationErr] = useState(false);
 
     let findLocation = useRef(() => { });
 
     findLocation = async () => {
+        setLoading(true);
+        setGeolocationErr(false);
         try {
-            setLoading(true);
-
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                const coords = {
-                    accuracy: pos.coords.accuracy,
-                    latitude: pos.coords.latitude,
-                    longitude: pos.coords.longitude
-                }
-
-                const currResponse = await WeatherService.getCurrentWeatherByCoords(coords.latitude, coords.longitude);
-                const forecastResponse = await WeatherService.getForecastWeatherByCoords(coords.latitude, coords.longitude);
-                if (currResponse || forecastResponse) {
+            const geolocation = await Geolocation.getCurrentPosition();
+            const currResponse = await WeatherService.getCurrentWeatherByCoords(geolocation.coords.latitude, geolocation.coords.longitude);
+            const forecastResponse = await WeatherService.getForecastWeatherByCoords(geolocation.coords.latitude, geolocation.coords.longitude);
+            if (currResponse || forecastResponse) {
+                if (currResponse) {
                     if (currResponse) {
-                        if (currResponse) {
-                            const currentWeather = WeatherService.createCurrentWeatherFromResponse(currResponse.data);
-                            dispatch(setCurrentWeather(currentWeather));
+                        const currentWeather = WeatherService.createCurrentWeatherFromResponse(currResponse.data);
+                        dispatch(setCurrentWeather(currentWeather));
 
-                            const newCity = WeatherService.createCityFromResponse(currResponse.data, currResponse.data.name);
-                            dispatch(setCities(newCity));
-                            dispatch(setLastFetch('current'));
-                        }
-
-                        if (forecastResponse) {
-                            const forecastWeather = WeatherService.createForecastWeatherFromResponse(forecastResponse.data);
-                            dispatch(setForecastWeather(forecastWeather));
-                            dispatch(setLastFetch('forecast'));
-                        }
+                        const newCity = WeatherService.createCityFromResponse(currResponse.data, currResponse.data.name);
+                        dispatch(setCities(newCity));
+                        dispatch(setLastFetch('current'));
                     }
-                } else {
-                    setLoading(false);
-                    serGeolocationErr(false);
+
+                    if (forecastResponse) {
+                        const forecastWeather = WeatherService.createForecastWeatherFromResponse(forecastResponse.data);
+                        dispatch(setForecastWeather(forecastWeather));
+                        dispatch(setLastFetch('forecast'));
+                    }
                 }
-
-                setLoading(false);
-                serGeolocationErr(false);
-            }, (err) => {
-                serGeolocationErr(true);
-                throw err;
-            })
+            } else {
+                setGeolocationErr(false);
+            }
         } catch (e) {
-            console.log(e);
+            setLoading(false);
+            setGeolocationErr(true);
         }
-
         setLoading(false);
     }
 
